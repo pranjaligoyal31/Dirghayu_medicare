@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Specialities = () => {
+const Verify = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Specialities = () => {
   )
 }
 
-export default Specialities
+export default Verify
