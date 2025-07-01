@@ -14,6 +14,7 @@ const Navbar = () => {
     setToken(false);
     navigate('/login');
   };
+  // bg-[#e67e22]
 
   const navItems = [
     { label: 'HOME', path: '/' },
@@ -26,7 +27,7 @@ const Navbar = () => {
 
   return (
     <div className='flex items-center justify-between px-4 md:px-8 py-4 border-b border-gray-300 shadow-sm sticky top-0 z-30 bg-white'>
-      <img onClick={() => navigate('/')} className='w-40 cursor-pointer' src={assets.logo} alt="logo" />
+      <img onClick={() => navigate('/')} className='w-40 h-20 cursor-pointer' src={assets.logo_my} alt="logo" />
 
       {/* Desktop Navigation */}
       <ul className='hidden md:flex items-center gap-6 text-sm font-medium text-gray-700'>
