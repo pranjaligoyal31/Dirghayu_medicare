@@ -7,18 +7,18 @@ import {
   addOrganDonation,
   getAllOrganDonations
 } from "../controllers/donationController.js";
-import { authUser } from "../middlewares/authUser.js";
+import authUser from "../middlewares/authUser.js";
 
-const router = express.Router();
+const donationRouter = express.Router();
 
 // Protect donation creation routes
-router.post("/blood", authUser, addBloodDonation);
-router.post("/money", authUser, addMoneyDonation);
-router.post("/organ", authUser, addOrganDonation);
+donationRouter.post("/blood", authUser, addBloodDonation);
+donationRouter.post("/money", authUser, addMoneyDonation);
+donationRouter.post("/organ", authUser, addOrganDonation);
 
 // Public routes (or protect if needed)
-router.get("/blood", getAllBloodDonations);
-router.get("/money", getAllMoneyDonations);
-router.get("/organ", getAllOrganDonations);
+donationRouter.get("/blood", getAllBloodDonations);
+donationRouter.get("/money", getAllMoneyDonations);
+donationRouter.get("/organ", getAllOrganDonations);
 
-export default router;
+export default donationRouter;

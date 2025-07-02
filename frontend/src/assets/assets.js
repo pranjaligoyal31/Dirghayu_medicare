@@ -5,6 +5,7 @@ import profile_pic from './profile_pic.png'
 import contact_image from './contact_image.png'
 import about_image from './about_image.png'
 import logo from './logo.svg'
+import logo_my from './logo_my.png'
 import dropdown_icon from './dropdown_icon.svg'
 import menu_icon from './menu_icon.svg'
 import cross_icon from './cross_icon.png'
@@ -51,6 +52,7 @@ export const assets = {
     contact_image,
     about_image,
     menu_icon,
+    logo_my,
     cross_icon,
     dropdown_icon,
     upload_icon,
