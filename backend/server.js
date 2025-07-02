@@ -7,6 +7,7 @@ import doctorRouter from "./routes/doctorRoute.js";
 import userRouter from "./routes/userRoute.js";
 import connectCloudinary from './config/cloudinary.js';
 import donationRouter from './routes/donationRoute.js';
+import router from './routes/upload.js'
 
 // app config
 const app = express();
@@ -23,6 +24,7 @@ app.use(
         credentials:true,
     })
 )
+app.use('/api', router)
 
 // api endpoints
 app.use("/api/admin", adminRouter);
