@@ -19,7 +19,7 @@ export const addBloodDonation = async (req, res) => {
       return res.status(400).json({ success: false, message: "Minimum height must be 140cm" });
     }
     const donation = new BloodDonation({
-      userId: req.user._id,
+      userId: req.user.id,
       bloodGroup,
       units,
       weight,
@@ -48,7 +48,7 @@ export const addMoneyDonation = async (req, res) => {
       return res.status(400).json({ success: false, message: "Amount and date are required" });
     }
     const donation = new MoneyDonation({
-      userId: req.user._id,
+      userId: req.user.id,
       amount,
       message,
       payment,
@@ -78,7 +78,7 @@ export const addOrganDonation = async (req, res) => {
     }
 
     const donation = new OrganDonation({
-      userId: req.user._id,
+      userId: req.user.id,
       organ,
       isAliveDonation,
       medicalClearance,
