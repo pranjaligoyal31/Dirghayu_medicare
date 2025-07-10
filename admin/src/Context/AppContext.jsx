@@ -35,11 +35,28 @@ const AppContextProvider = (props) => {
     fetchDonations();
   }, [backendUrl]);
 
+  const calculateAge = (dob) => {
+  const birthDate = new Date(dob);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
+const slotDateFormat = (slotDateString) => {
+  const [day, month, year] = slotDateString.split("_");
+  return `${day.padStart(2, "0")}/${month.padStart(2, "0")}/${year}`;
+};
   const value = {
     currency,
     bloodDonations,
     moneyDonations,
     organDonations,
+    calculateAge,
+    slotDateFormat
   };
 
   return (

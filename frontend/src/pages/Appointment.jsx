@@ -25,6 +25,8 @@ const Appointment = () => {
   };
 
   const getAvailableSlots = async () => {
+
+    if (!docInfo || !docInfo.slots_booked) return; 
     setDocSlots([]);
     let today = new Date();
 
@@ -99,7 +101,9 @@ const Appointment = () => {
       const { data } = await axios.post(
         backendUrl + "/api/user/book-appointment",
         { docId, slotDate, slotTime },
-        { headers: { token } }
+        { headers: {
+  Authorization: `Bearer ${token}`,
+} }
       );
       if (data.success) {
         toast.success(data.message);
