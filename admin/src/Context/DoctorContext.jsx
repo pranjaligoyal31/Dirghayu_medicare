@@ -72,23 +72,50 @@ const DoctorContextProvider = (props) => {
     }
   };
 
-  const getDashData = async () => {
-    try {
-      const { data } = await axios.get(backendUrl + "/api/doctor/dashboard", {
-        headers: { dToken },
+const getDashData = async () => {
+  try {
+    const { data } = await axios.get(backendUrl + "/api/doctor/dashboard", {
+      headers: { dToken },
+    });
+
+    if (data.success) {
+      const dash = data.dashData;
+
+      // ✅ Validate latestAppointments array
+      const rawAppointments = Array.isArray(dash.latestAppointments)
+        ? dash.latestAppointments
+        : [];
+
+      const safeAppointments = rawAppointments.map((item, idx) => {
+        if (item && typeof item === "object") {
+          return {
+            ...item,
+            docId: dash.doctorId || null, // attach docId safely
+          };
+        } else {
+          console.warn(`Invalid appointment at index ${idx}:`, item);
+          return null; // skip undefined or invalid entries
+        }
+      }).filter(Boolean); // remove nulls
+
+      setDashData({
+        ...dash,
+        latestAppointments: safeAppointments,
       });
 
-      if (data.success) {
-        setDashData(data.dashData);
-        console.log(data.dashData);
-      } else {
-        toast.error(data.message);
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
+      console.log("Safe dashData set ✅", {
+        ...dash,
+        latestAppointments: safeAppointments,
+      });
+    } else {
+      toast.error(data.message);
     }
-  };
+  } catch (error) {
+    console.error("getDashData error ❌", error);
+    toast.error(error.message);
+  }
+};
+
 
   const getProfileData = async () => {
     try {
