@@ -20,8 +20,7 @@ app.use(express.json());
 
 app.use(
     cors({
-        // origin: ['http://localhost:5173', 'http://localhost:5174'],
-        origin:true,
+        origin: ['https://dirghayu-medicare-aocc-8rvuja28f-paridhis-projects-96f99c4a.vercel.app/', 'https://dirghayu-medicare-orras473o-paridhis-projects-96f99c4a.vercel.app/'],
         credentials:true,
     })
 )
