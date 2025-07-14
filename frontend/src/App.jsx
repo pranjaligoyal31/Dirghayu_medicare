@@ -10,7 +10,7 @@ import Contact from './pages/Contact'
 import Appointment from './pages/Appointment'
 import MyAppointments from './pages/MyAppointments'
 import MyProfile from './pages/MyProfile'
-import Specialities from './pages/Specialities'
+// import Specialities from './pages/Specialities'
 import Donate from './pages/Donate'
 import Verify from './pages/Verify'
 import { ToastContainer } from 'react-toastify'
@@ -32,7 +32,7 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/verify' element={<Verify />} />
-        <Route path='/specialities' element={<Specialities />} />
+        {/* <Route path='/specialities' element={<Specialities />} /> */}
         <Route path='/donate&save' element={<Donate />} />
         
 

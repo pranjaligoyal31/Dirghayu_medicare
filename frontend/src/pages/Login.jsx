@@ -16,29 +16,15 @@ const Login = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     try {
-      if (state === "Sign Up") {
-        const { data } = await axios.post(`${backendUrl}/api/user/register`, {
-          name,
-          email,
-          password,
-        });
-        if (data.success) {
-          localStorage.setItem("token", data.token);
-          setToken(data.token);
-        } else {
-          toast.error(data.message);
-        }
+      const url = state === "Sign Up" ? "/register" : "/login";
+      const payload = state === "Sign Up" ? { name, email, password } : { email, password };
+      const { data } = await axios.post(`${backendUrl}/api/user${url}`, payload);
+
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        setToken(data.token);
       } else {
-        const { data } = await axios.post(`${backendUrl}/api/user/login`, {
-          email,
-          password,
-        });
-        if (data.success) {
-          localStorage.setItem("token", data.token);
-          setToken(data.token);
-        } else {
-          toast.error(data.message);
-        }
+        toast.error(data.message);
       }
     } catch (error) {
       toast.error(error.message);
@@ -55,7 +41,7 @@ const Login = () => {
         onSubmit={onSubmitHandler}
         className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl"
       >
-        <h2 className="text-3xl font-bold text-center text-blue-700 mb-2">
+        <h2 className="text-3xl font-bold text-center text-[#007BBA] mb-2">
           {state === "Sign Up" ? "Create Account" : "Login"}
         </h2>
         <p className="text-center text-gray-600 mb-6">
@@ -64,10 +50,10 @@ const Login = () => {
 
         {state === "Sign Up" && (
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Full Name</label>
+            <label className="block text-sm font-medium mb-1 text-[#007BBA]">Full Name</label>
             <input
               type="text"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F7931E] outline-none"
               onChange={(e) => setName(e.target.value)}
               value={name}
               required
@@ -76,10 +62,10 @@ const Login = () => {
         )}
 
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-1">Email</label>
+          <label className="block text-sm font-medium mb-1 text-[#007BBA]">Email</label>
           <input
             type="email"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F7931E] outline-none"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
@@ -87,10 +73,10 @@ const Login = () => {
         </div>
 
         <div className="mb-6">
-          <label className="block text-sm font-medium mb-1">Password</label>
+          <label className="block text-sm font-medium mb-1 text-[#007BBA]">Password</label>
           <input
             type="password"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F7931E] outline-none"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
@@ -99,7 +85,7 @@ const Login = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition font-medium text-lg"
+          className="w-full bg-[#007BBA] hover:bg-[#006aa3] text-white py-2 rounded-md transition font-medium text-lg"
         >
           {state === "Sign Up" ? "Create Account" : "Login"}
         </button>
@@ -110,7 +96,7 @@ const Login = () => {
               Already have an account?{" "}
               <span
                 onClick={() => setState("Login")}
-                className="text-blue-600 hover:underline cursor-pointer"
+                className="text-[#F7931E] hover:underline cursor-pointer font-medium"
               >
                 Login here
               </span>
@@ -120,7 +106,7 @@ const Login = () => {
               New here?{" "}
               <span
                 onClick={() => setState("Sign Up")}
-                className="text-blue-600 hover:underline cursor-pointer"
+                className="text-[#F7931E] hover:underline cursor-pointer font-medium"
               >
                 Create an account
               </span>
