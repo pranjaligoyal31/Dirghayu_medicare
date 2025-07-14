@@ -76,70 +76,75 @@ const MyAppointments = () => {
     }
   }, [token]);
 
-  return (
-    <div>
-      <p className="pb-3 mt-12 font-medium text-zinc-700 border-b">
-        My appointments
-      </p>
-      <div>
-        {appointments.map((item, index) => (
-          <div
-            className="grid grid-cols-[1fr_2fr] gap-4 sm:flex sm:gap-6 py-2 border-b"
-            key={index}
-          >
-            <div>
-              <img
-                className="w-32 bg-indigo-50"
-                src={item.docData.image}
-                alt=""
-              />
-            </div>
-            <div className="flex-1 text-sm text-zinc-600">
-              <p className="text-neutral-800 font-semibold">
-                {item.docData.name}
+ return (
+  <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-0 mt-10">
+    <p className="pb-3 mb-6 text-xl font-semibold text-[#007BBA] border-b border-gray-300">
+      My Appointments
+    </p>
+    <div className="flex flex-col gap-6">
+      {appointments.map((item, index) => (
+        <div
+          className="flex flex-col sm:flex-row sm:items-start border-b pb-4 gap-6"
+          key={index}
+        >
+          {/* Doctor Image */}
+          <div>
+            <img
+              className="w-32 h-32 object-cover rounded-md shadow-sm bg-blue-50"
+              src={item.docData.image}
+              alt="doctor"
+            />
+          </div>
+
+          {/* Doctor Info */}
+          <div className="flex-1 text-sm text-gray-700">
+            <p className="text-lg font-semibold text-[#007BBA]">{item.docData.name}</p>
+            <p className="text-[#F7931E] font-medium">{item.docData.speciality}</p>
+            <div className="mt-2 text-sm">
+              <p className="font-medium text-gray-600">Address:</p>
+              <p>{item.docData.address.line1}</p>
+              <p>{item.docData.address.line2}</p>
+              <p className="mt-2 text-gray-700 font-medium">
+                Date & Time:{" "}
+                <span className="font-normal">
+                  {slotDateFormat(item.slotDate)} | {item.slotTime}
+                </span>
               </p>
-              <p>{item.docData.speciality}</p>
-              <p className="text-zinc-700 font-medium mt-1">Address:</p>
-              <p className="text-xs">{item.docData.address.line1}</p>
-              <p className="text-xs">{item.docData.address.line2}</p>
-              <p className="text-xs mt-1">
-                <span className="text-sm text-neutral-700 font-medium">
-                  Date & Time:
-                </span>{" "}
-                {slotDateFormat(item.slotDate)} | {item.slotTime}
-              </p>
-            </div>
-            <div></div>
-            <div className="flex flex-col gap-2 justify-end">
-              {!item.cancelled && !item.isCompleted && (
-                <button className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300">
-                  Pay Online
-                </button>
-              )}
-              {!item.cancelled && !item.isCompleted && (
-                <button
-                  onClick={() => cancelAppointment(item._id)}
-                  className="text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300"
-                >
-                  Cancel appointment
-                </button>
-              )}
-              {item.cancelled && !item.isCompleted && (
-                <button className="sm:min-w-48 py-2 border border-red-500 rounded text-red-500">
-                  Appointment cancelled
-                </button>
-              )}
-              {item.isCompleted && (
-                <button className="sm:min-w-48 py-2 border border-green-500 rounded text-green-500">
-                  Completed
-                </button>
-              )}
             </div>
           </div>
-        ))}
-      </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-col gap-2 mt-4 sm:mt-0 sm:items-end">
+            {!item.cancelled && !item.isCompleted && (
+              <button className="text-sm px-4 py-2 border border-[#007BBA] text-[#007BBA] rounded-full hover:bg-[#007BBA] hover:text-white transition-all">
+                Pay Online
+              </button>
+            )}
+            {!item.cancelled && !item.isCompleted && (
+              <button
+                onClick={() => cancelAppointment(item._id)}
+                className="text-sm px-4 py-2 border border-red-500 text-red-500 rounded-full hover:bg-red-500 hover:text-white transition-all"
+              >
+                Cancel Appointment
+              </button>
+            )}
+            {item.cancelled && !item.isCompleted && (
+              <span className="text-sm px-4 py-2 border border-red-400 text-red-500 rounded-full bg-red-50 cursor-default">
+                Appointment Cancelled
+              </span>
+            )}
+            {item.isCompleted && (
+              <span className="text-sm px-4 py-2 border border-green-500 text-green-600 rounded-full bg-green-50 cursor-default">
+                Completed
+              </span>
+            )}
+          </div>
+        </div>
+      ))}
     </div>
-  );
+  </div>
+);
+
 };
 
 export default MyAppointments;
