@@ -20,7 +20,7 @@ app.use(express.json());
 
 app.use(
     cors({
-        origin: ['https://dirghayu-medicare-aocc-8rvuja28f-paridhis-projects-96f99c4a.vercel.app', 'https://dirghayu-medicare-orras473o-paridhis-projects-96f99c4a.vercel.app'],
+        origin: ['https://dirghayu-medicare-aocc.vercel.app', 'https://dirghayu-medicare.vercel.app'],
         credentials:true,
     })
 )
