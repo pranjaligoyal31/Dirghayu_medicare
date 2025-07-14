@@ -100,7 +100,7 @@ Create `.env`:
 PORT=4000
 JWT_SECRET=your_jwt_secret_key_here
 # 🌐 MongoDB
-MONGODB_URI=mongodb+srv://yourUsername:yourPassword@cluster0.mongodb.net/dirghayu
+MONGODB_URI=mongodb_string
 # ☁️ Cloudinary
 CLOUDINARY_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
